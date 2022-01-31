@@ -1,57 +1,38 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
+
+const MyContext = React.createContext();
 
 const App = () => {
     return(
-        <div>
-            <HookSwitcher />
-        </div>
+        <MyContext.Provider value='Hello World'>
+            <Child />
+        </MyContext.Provider>
     );
 }
 
-const HookSwitcher = () => {
+const Child = () => {
+    //было
+    // return(
+    //     <MyContext.Consumer>
+    //         { (value) => {
+    //             return (
+    //                 <p> {value} </p>
+    //             )
+    //         }
+    //         }
+    //     </MyContext.Consumer>
+    // );
 
-    //color - текущий цвет
-    //setColor - функция кот работает аналогично setState
-    const [ color, setColor ] = useState('white');
-    const [ fontSize, setFontSize ] = useState(14);
+    //стало
 
-    return (
-        <div style={{padding: '10px', border: '1px solid #000', backgroundColor: color, fontSize: `${fontSize}px`}}>
-            <p>Hello word</p>
-            <div style={{marginBottom: '10px'}}>
-                <button
-                    onClick={() => setColor('grey')}>
-                    Dark
-                </button>
-                <button
-                    onClick={() => setColor('white')}>
-                    Light
-                </button>
-            </div>
-
-            <div style={{marginBottom: '10px'}}>
-                <button
-                    onClick={() => setFontSize((s) => s + 2)}>
-                    +
-                </button>
-                <button
-                    onClick={() => setFontSize((s) => s - 2)}>
-                    -
-                </button>
-            </div>
-        </div>
-    );
+    const value = useContext(MyContext);
+    return <p>{value}</p>
 }
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>,
+    document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-// reportWebVitals();
