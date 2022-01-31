@@ -1,6 +1,6 @@
 import React, {Component, useContext, useEffect, useState} from 'react';
 
-const AppUseEffect = () => {
+const AppUseEffectExercises = () => {
     const [value, setValue] = useState(0);
     const [visible, setVisible] = useState(true);
 
@@ -13,6 +13,8 @@ const AppUseEffect = () => {
                     onClick={() => setVisible(false)}>Hide</button>
                 <ClassCounter value={value} />
                 <HookCounter value={value} />
+
+                <Notification />
             </div>
         )
     } else {
@@ -25,16 +27,17 @@ const AppUseEffect = () => {
 
 const HookCounter= ({value}) => {
 
-    // эта функция работает когда создался компонетн и на каждое его изменение как componentDidMount и componentDidUpdate
-    //вторым аргументом передается значение за которым мы будем следить и если value измениться только тогда стработает ф-цая как при componentDidUpdate
-    //если вторым аргументом передать пустой массив то ф-ция запуститься только один раз как при componentDidMount
     useEffect(() => {
-        console.log('useEffect');
+        console.log('mount');
 
-        //oчистка предидущего эффекта , прежде чем запустить следующий
-        return () => console.log('clear')
-    }, [value])
-    ////
+        return () => console.log('unmount');
+    }, [])
+
+    useEffect(() => {
+        console.log('update');
+    })
+
+    useEffect(() => () => console.log('unmount'), [])
 
 
     return <p>{value}</p>
@@ -57,6 +60,25 @@ class ClassCounter extends Component {
     }
 }
 
+const Notification = () => {
+
+    const [visible, setVisible] = useState(true);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setVisible(false)
+        }, 1500)
+
+        return () => clearTimeout(timeout);
+    }, [])
+    return (
+        <div>
+            {visible && <p>Notification message</p>}
+        </div>
+    )
+
+}
 
 
-export default AppUseEffect;
+
+export default AppUseEffectExercises;

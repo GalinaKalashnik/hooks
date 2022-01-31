@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
 
-import AppUseEffect from './use-effect'
+import AppUseEffect from './use-effect';
+import AppUseEffectExercises from './use-effect-exercises';
 
 const MyContext = React.createContext();
 
@@ -31,8 +32,8 @@ const Child = () => {
     const value = useContext(MyContext);
     return (
         <div>
-        <p>{value}</p>
-            <AppUseEffect />
+            <p>{value}</p>
+            <AppUseEffectExercises />
         </div>
     )
 }
