@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
 
+import AppUseEffect from './use-effect'
+
 const MyContext = React.createContext();
 
 const App = () => {
@@ -27,7 +29,12 @@ const Child = () => {
     //стало
 
     const value = useContext(MyContext);
-    return <p>{value}</p>
+    return (
+        <div>
+        <p>{value}</p>
+            <AppUseEffect />
+        </div>
+    )
 }
 
 ReactDOM.render(
