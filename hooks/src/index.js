@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import AppUseEffect from './use-effect';
 import AppUseEffectExercises from './use-effect-exercises';
+import AppUseEffectLoadData from "./use-effect-load-data";
 
 const MyContext = React.createContext();
 
@@ -34,6 +35,8 @@ const Child = () => {
         <div>
             <p>{value}</p>
             <AppUseEffectExercises />
+
+            <AppUseEffectLoadData />
         </div>
     )
 }
