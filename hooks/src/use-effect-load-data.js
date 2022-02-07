@@ -22,8 +22,7 @@ const AppUseEffectLoadData = () => {
     }
 }
 
-const PlanetInfo = ( {id} ) => {
-
+const usePlanetInfo = (id) => {
     const [name, setPlanetName] = useState(null);
 
     useEffect(() => {
@@ -37,7 +36,12 @@ const PlanetInfo = ( {id} ) => {
 
     }, [id])
 
-    return <p>{id} - {name}</p>
+    return name;
+}
+
+const PlanetInfo = ( {id} ) => {
+    const name = usePlanetInfo(id);
+    return <div>{id} - {name}</div>
 }
 
 
